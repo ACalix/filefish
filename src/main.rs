@@ -24,7 +24,7 @@ fn main() {
         return;
     }
 
-    rsync(&local_path_string, &remote_path_string);
+    // rsync(&local_path_string, &remote_path_string);
 
     let (tx, rx) = channel();
     let w: Result<RecommendedWatcher, Error> = Watcher::new(tx);
@@ -59,6 +59,7 @@ fn rsync (source :&str, target :&str) {
     let options = vec![
         "-r",
         "-v",
+        "--exclude='.git/",
         "--delete"];
     let output = Command::new("rsync")
         .args(&options)
